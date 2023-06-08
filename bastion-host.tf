@@ -12,7 +12,7 @@ resource "aws_instance" "vprofile-bastion" {
   }
 
   provisioner "file" {
-    content     = templatefile("templates/db-deploy.tmpl", { rds-endpoint = aws_db_instance.vprofile-rds.address, DBUSER = var.DBUSER, DBPASS = var.DBPASS })
+    content     = templatefile("templates/db-deploy.tmpl", { rds-endpoint = outputs.vprofile-rds, DBUSER = var.DBUSER, DBPASS = var.DBPASS })
     destination = "/tmp/vprofile-dbdeploy.sh"
   }
 
